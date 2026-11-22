@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: npi-manikganj-website
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
