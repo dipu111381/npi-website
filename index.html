@@ -73,9 +73,10 @@ footer{background:#071e4c;color:#d7e5ff;padding:22px;text-align:center;font-size
  <div class="field"><label for="email">ইমেইল</label><input id="email" name="email" type="email" placeholder="example@email.com"></div>
  <div class="field"><label for="department">পছন্দের বিভাগ *</label><select id="department" name="department" required><option value="">বিভাগ নির্বাচন করুন</option><option>Computer</option><option>Civil</option><option>Food</option><option>Electrical</option><option>Textile</option><option>Mechanical</option><option>Architecture</option></select></div>
  <div class="field"><label for="year">SSC/সমমান পাশের বছর</label><input id="year" name="year" type="number" min="1990" max="2035" placeholder="যেমন: 2025"></div>
+ <div class="field"><label for="district">জেলা</label><input id="district" name="district" placeholder="আপনার জেলার নাম"></div>
  <div class="field full"><label for="address">ঠিকানা</label><textarea id="address" name="address" placeholder="আপনার বর্তমান ঠিকানা"></textarea></div>
  <div class="field full"><button class="btn submit" type="submit">আবেদন জমা দিন</button></div>
-</div><p class="form-note">নোট: এটি ওয়েবসাইটের প্রাথমিক ফরম ডিজাইন। আবেদন বাস্তবে প্রতিষ্ঠানে পাঠানো/সংরক্ষণের জন্য অ্যাডমিন ইমেইল, ডেটাবেস বা সার্ভারের সঙ্গে সংযোগ করতে হবে।</p><div class="notice" id="notice" role="status">ফরমের তথ্য যাচাই সম্পন্ন হয়েছে। এটি এখনো সার্ভারে জমা হয়নি; অনলাইন আবেদন চালু করতে সংযোগ সেটআপ প্রয়োজন।</div>
+</div><p class="form-note">নোট: আপনার আবেদন অনলাইনে সংরক্ষিত হবে। প্রয়োজনে ভর্তি টিম আপনার দেওয়া মোবাইল নম্বরে যোগাযোগ করবে।</p><div class="notice" id="notice" role="status">ফরমের তথ্য যাচাই সম্পন্ন হয়েছে। এটি এখনো সার্ভারে জমা হয়নি; অনলাইন আবেদন চালু করতে সংযোগ সেটআপ প্রয়োজন।</div>
 </form></div></section>
 <div class="contact" id="contact"><div class="contact-inner"><div><h2>যোগাযোগ করুন</h2><p>National Polytechnic Institute · Manikganj, Bangladesh</p><p>ফোন: 01321493174</p></div><a class="btn" href="tel:01321493174">এখনই কল করুন</a></div></div>
 </main><footer>© 2026 National Polytechnic Institute, Manikganj. সর্বস্বত্ব সংরক্ষিত। · <a href='admin.html' style='color:#d7e5ff;text-decoration:underline'>অ্যাডমিন প্যানেল</a></footer>
@@ -91,7 +92,7 @@ document.getElementById('admissionForm').addEventListener('submit', async functi
  const notice=document.getElementById('notice');
  if(!npiSupabase){notice.textContent='অনলাইন আবেদন চালু করতে config.js-এ Supabase URL ও anon key সেট করতে হবে।';notice.style.display='block';return;}
  const f=new FormData(this);
- const payload={student_name:f.get('student'),phone:f.get('phone'),guardian_name:f.get('guardian'),email:f.get('email'),department:f.get('department'),passing_year:f.get('year')?Number(f.get('year')):null,address:f.get('address')};
+ const payload={student_name:f.get('student'),phone:f.get('phone'),guardian_name:f.get('guardian'),email:f.get('email'),department:f.get('department'),passing_year:f.get('year')?Number(f.get('year')):null,district:f.get('district'),address:f.get('address')};
  const {error}=await npiSupabase.from('applications').insert(payload);
  if(error){notice.textContent='আবেদন জমা হয়নি। অনুগ্রহ করে আবার চেষ্টা করুন অথবা ফোনে যোগাযোগ করুন।';notice.style.display='block';return;}
  notice.textContent='ধন্যবাদ! আপনার আবেদন সফলভাবে জমা হয়েছে।';notice.style.display='block';this.reset();
