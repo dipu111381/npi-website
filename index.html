@@ -76,7 +76,7 @@ footer{background:#071e4c;color:#d7e5ff;padding:22px;text-align:center;font-size
  <div class="field"><label for="district">জেলা</label><input id="district" name="district" placeholder="আপনার জেলার নাম"></div>
  <div class="field full"><label for="address">ঠিকানা</label><textarea id="address" name="address" placeholder="আপনার বর্তমান ঠিকানা"></textarea></div>
  <div class="field full"><button class="btn submit" type="submit">আবেদন জমা দিন</button></div>
-</div><p class="form-note">নোট: আপনার আবেদন অনলাইনে সংরক্ষিত হবে। প্রয়োজনে ভর্তি টিম আপনার দেওয়া মোবাইল নম্বরে যোগাযোগ করবে।</p><div class="notice" id="notice" role="status">ফরমের তথ্য যাচাই সম্পন্ন হয়েছে। এটি এখনো সার্ভারে জমা হয়নি; অনলাইন আবেদন চালু করতে সংযোগ সেটআপ প্রয়োজন।</div>
+</div><p class="form-note">নোট: আপনার আবেদন অনলাইনে সংরক্ষিত হবে। প্রয়োজনে ভর্তি টিম আপনার দেওয়া মোবাইল নম্বরে যোগাযোগ করবে।</p><div class="notice" id="notice" role="status">আপনার তথ্য যাচাই করে আবেদন জমা দিন। সফলভাবে জমা হলে নিশ্চিতকরণ বার্তা দেখানো হবে।</div>
 </form></div></section>
 <div class="contact" id="contact"><div class="contact-inner"><div><h2>যোগাযোগ করুন</h2><p>National Polytechnic Institute · Manikganj, Bangladesh</p><p>ফোন: 01321493174</p></div><a class="btn" href="tel:01321493174">এখনই কল করুন</a></div></div>
 </main><footer>© 2026 National Polytechnic Institute, Manikganj. সর্বস্বত্ব সংরক্ষিত। · <a href='admin.html' style='color:#d7e5ff;text-decoration:underline'>অ্যাডমিন প্যানেল</a></footer>
@@ -90,7 +90,7 @@ if (NPI_SUPABASE_URL && NPI_SUPABASE_ANON_KEY && window.supabase) {
 document.getElementById('admissionForm').addEventListener('submit', async function(e){
  e.preventDefault(); if(!this.reportValidity())return;
  const notice=document.getElementById('notice');
- if(!npiSupabase){notice.textContent='অনলাইন আবেদন চালু করতে config.js-এ Supabase URL ও anon key সেট করতে হবে।';notice.style.display='block';return;}
+ if(!npiSupabase){notice.textContent='অনলাইন আবেদন সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন অথবা ফোনে যোগাযোগ করুন।';notice.style.display='block';return;}
  const f=new FormData(this);
  const payload={student_name:f.get('student'),phone:f.get('phone'),guardian_name:f.get('guardian'),email:f.get('email'),department:f.get('department'),passing_year:f.get('year')?Number(f.get('year')):null,district:f.get('district'),address:f.get('address')};
  const {error}=await npiSupabase.from('applications').insert(payload);
